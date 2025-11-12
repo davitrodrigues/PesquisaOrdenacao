@@ -5,7 +5,9 @@ import java.util.ArrayList;
 
 public class teste {
     public static void main(String[] args) {
-        
+        teste t= new teste();
+        t.heapSort("arquivos_base/Reserva1000ord.txt");
+        t.exibirLista();
     }
 
     public  static ArrayList<String> lerArquivo(String caminho){
@@ -21,21 +23,24 @@ public class teste {
         }
         return linhas;
     }
+    private int[] lista;
+    private int quant;
 
 
         public void heapSort(String caminho) {
         // Ler o arquivo
         ArrayList<String> linhas = lerArquivo(caminho);
         
-        // Converter para array de inteiros
         this.lista = new int[linhas.size()];
         this.quant = linhas.size();
         
         for (int i = 0; i < linhas.size(); i++) {
-            this.lista[i] = Integer.parseInt(linhas.get(i).trim());
+            String linha = linhas.get(i).trim();
+            String[] partes = linha.split(";");           // separa pelos ';'
+            String campoFinal = partes[partes.length - 1]; // pega o último campo
+            String numeroLimpo = campoFinal.replaceAll("[^0-9]", ""); // remove letras e símbolos
+            this.lista[i] = Integer.parseInt(numeroLimpo); // converte para inteiro
         }
-        
-        // Agora fazer o HeapSort
         int dir = quant-1, esq = (dir-1)/2, temp;
         
         while (esq >= 0) {
@@ -75,4 +80,18 @@ public class teste {
             this.lista[i] = raiz;
         }
     }
+
+    public void exibirLista() {
+        long inicio = System.currentTimeMillis();
+
+        System.out.println("=== Início da Exibição ===");
+        for (int valor : this.lista) {
+            System.out.println(valor);
+        }
+        System.out.println("=== Fim da Exibição ===");
+
+        long fim = System.currentTimeMillis();
+        System.out.println("Tempo total de exibição: " + (fim - inicio) + " ms");
+    }
+    
 }
