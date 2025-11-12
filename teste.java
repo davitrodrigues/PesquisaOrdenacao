@@ -7,7 +7,7 @@ public class teste {
     public static void main(String[] args) {
         teste t= new teste();
         t.heapSort("arquivos_base/Reserva1000ord.txt");
-        t.exibirLista();
+        t.exibirLista("heapsort");
     }
 
     public  static ArrayList<String> lerArquivo(String caminho){
@@ -81,17 +81,13 @@ public class teste {
         }
     }
 
-    public void exibirLista() {
+    public void exibirLista(String metodo) {
         long inicio = System.currentTimeMillis();
-
-        System.out.println("=== Início da Exibição ===");
         for (int valor : this.lista) {
             System.out.println(valor);
         }
-        System.out.println("=== Fim da Exibição ===");
-
         long fim = System.currentTimeMillis();
-        System.out.println("Tempo total de exibição: " + (fim - inicio) + " ms");
+        System.out.println(fim-inicio);
     }
     
 }
